@@ -49,7 +49,8 @@ function loadItems() {
 form.addEventListener('submit', AddItem)
 
 function AddItem(e){
-     if (input.value === '') {
+    items = getItemsFromLS();
+     if (input.value === '' || items.indexOf(input.value)>-1) {
          alert('add new item')
      } else {
 
@@ -66,11 +67,13 @@ content.addEventListener('click', function (e) {
 
     if (e.target.classList.contains('fa-times')) {
         if (confirm('Are you sure?')) {
+                        console.log(e.target.parentElement.parentElement.parentNode);
             items = getItemsFromLS()
             let index = e.target.parentElement.parentElement.children[0].textContent-1
             items.splice(index, 1)
             deleteItemFromLS(items);
             count.innerHTML = items.length
+
         }
 
     }
